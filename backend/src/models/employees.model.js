@@ -20,6 +20,14 @@ const employeeSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
+    cargo: {
+        type: String,
+        required: true
+    },
+    isDirect: {
+        type: Boolean,
+        required: true
+    },
     departmentCode: {
         type: Number
     }
