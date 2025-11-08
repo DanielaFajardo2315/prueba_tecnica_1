@@ -23,7 +23,7 @@ export const getAllEmployees = async (request, response) => {
     try {
         const allEmplyees = await employeeModel.find();
         return response.status(200).json({
-            "mensaje": "Empleados encontrados.",
+            "mensaje": `Se encontraron ${allEmplyees.length} empleados.`,
             "data": allEmplyees
         });
     } catch (error) {

@@ -23,7 +23,7 @@ export const getAllDepartments = async (request, response) => {
     try {
         const allDepartments = await departmentModel.find();
         return response.status(200).json({
-            "mensaje": "Departamentos encontrados.",
+            "mensaje": `Se encontraron ${allDepartments.length} departamentos registrados.`,
             "data": allDepartments
         });
     } catch (error) {
