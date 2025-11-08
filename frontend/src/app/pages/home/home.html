@@ -3,16 +3,42 @@
     <div class="info_container">
         <div class="container">
             <h2>Cantidad de empleados</h2>
-            <p></p>
+            @if (allEmployees.length === 0) {
+                <p>No Hay empleados</p>
+            } @else if (allEmployees.length === 1) {
+                <p>{{allEmployees.length}} empleado</p>
+            } @else {
+                <p>{{allEmployees.length}} empleados</p>
+            }
             <h2>Empleos directos</h2>
-            <p></p>
+            @if (directEmployeesCount === 0){
+                <p>No hay empleados directos</p>
+            } @else if (directEmployeesCount === 1) {
+                <p>{{directEmployeesCount}} empleado</p>
+            } @else {
+                <p>{{directEmployeesCount}} empleados</p>
+            }
+            <a class="button" routerLink="/empleados">Ver empleados</a>
         </div>
         <img src="assets/logotipo.png" alt="Logo Delivery" class="img_center">
         <div class="container">
             <h2>Cantidad de departamentos</h2>
-            <p></p>
+            @if (allDepartments.length === 0) {
+                <p>No hay departamentos</p>
+            } @else if (allDepartments.length === 1) {
+                <p>{{allDepartments.length}} departamento</p>
+            } @else {
+                <p>{{allDepartments.length}} departamentos</p>
+            }
             <h2>Cantidad de áreas</h2>
-            <p></p>
+            @if (areasCount === 0) {
+                <p>No hay áreas</p>
+            } @else if (areasCount === 1) {
+                <p>{{areasCount}} área</p>
+            } @else {
+                <p>{{areasCount}} áreas</p>
+            }
+            <a class="button" routerLink="/departamentos">Ver departamentos</a>
         </div>
     </div>
 </div>
