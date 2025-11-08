@@ -1,0 +1,10 @@
+@import url('https://fonts.cdnfonts.com/css/elvishlis');
+
+:root {
+    --color-primary: #B49A85;
+    --color-secundary: #414A6B;
+    --color-button: #FF5851;
+    --color-text: #1C1B20;
+    --color-text-light: #fffcf4;
+    --color-title: #F3C130;
+}
