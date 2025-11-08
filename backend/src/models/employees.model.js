@@ -29,7 +29,8 @@ const employeeSchema = new mongoose.Schema({
         required: true
     },
     departmentCode: {
-        type: Number
+        type: Number,
+        required: true
     }
 });
 
