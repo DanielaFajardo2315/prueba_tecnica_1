@@ -7,4 +7,19 @@
     --color-text: #1C1B20;
     --color-text-light: #fffcf4;
     --color-title: #F3C130;
+    --borde-radio: 20px;
+    --font-family: 'Elvishlis', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-primary);
+    font-family: var(--font-family);
+    color: var(--color-text);
+    overflow-x: hidden;
 }

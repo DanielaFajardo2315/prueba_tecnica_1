@@ -1,0 +1,28 @@
+nav {
+    background-color: var(--color-secundary);
+    border-radius: var(--borde-radio);
+}
+
+.nav_container {
+    background-color: var(--color-primary);
+    border-radius: 50%;
+}
+
+.image_logo {
+    margin: auto;
+}
+
+.list_nav li a {
+    color: var(--color-text-light);
+}
+
+.list_nav li:hover {
+    background-color: var(--color-button);
+    border-radius: var(--borde-radio);
+}
+
+.active-link{
+    background-color: var(--color-button) !important;
+    border-radius: var(--borde-radio);
+    margin: 0 5px;
+}

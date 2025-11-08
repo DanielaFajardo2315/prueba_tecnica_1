@@ -1,13 +1,24 @@
-<nav>
-    <ul class="nav justify-content-end">
-        <li>
-            <a routerLink=""><i class="bi bi-house-fill"></i> Inicio</a>
-        </li>
-        <li>
-            <a routerLink=""><i class="bi bi-people-fill"></i> Empleados</a>
-        </li>
-        <li>
-            <a routerLink=""><i class="bi bi-building-fill"></i> Departamentos</a>
-        </li>
-    </ul>
+<nav class="navbar navbar-expand-lg m-3">
+    <div class="container">
+        <div class="nav_container">
+            <a class="navbar-brand image_logo" routerLink="/"><img src="assets/logotipo.png" alt="Logo Delivery" width="80" height="80" class="d-inline-block m-2 logo"></a>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav d-flex align-items-center list_nav">
+                <li class="nav-item" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link" routerLink="/"><i class="bi bi-house-fill"></i> Inicio</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active-link">
+                    <a class="nav-link" routerLink="/empleados"><i class="bi bi-people-fill"></i> Empleados</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active-link">
+                    <a class="nav-link" routerLink="/departamentos"><i class="bi bi-building-fill"></i> Departamentos</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
