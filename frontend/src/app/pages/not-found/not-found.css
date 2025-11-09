@@ -1,0 +1,20 @@
+div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    background-color: var(--color-button);
+    text-decoration: none;
+    color: var(--color-text-light);
+    padding: 10px;
+    border-radius: var(--borde-radio);
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.button:hover {
+    transform: scale(1.1);
+}

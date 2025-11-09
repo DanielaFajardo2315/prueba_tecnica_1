@@ -20,7 +20,7 @@ export class Departments {
   selectedDepartmentForEdit?: Department;
 
   createForm = new FormGroup({
-    departmentCode: new FormControl<number | null>(null, [Validators.required]),
+    departmentCode: new FormControl<number | null>(null),
     departmentName: new FormControl('', [Validators.required]),
     companyArea: new FormControl('', [Validators.required]),
     departmentManager: new FormControl('', [Validators.required]),
@@ -47,6 +47,7 @@ export class Departments {
   createDepartment() {
     if (this.createForm.invalid) {
       this.createForm.markAllAsTouched();
+      console.log('Faltan datos por crear');
       return;
     }
 
