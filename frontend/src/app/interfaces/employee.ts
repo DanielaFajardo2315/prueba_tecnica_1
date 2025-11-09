@@ -3,8 +3,8 @@ export interface Employee {
     employeeCode: number;
     name: string;
     lastName1: string;
-    lastName?: string;
-    entryDate: Date;
+    lastName2?: string;
+    entryDate: Date | undefined;
     cargo: string;
     isDirect: boolean;
     departmentCode: number;

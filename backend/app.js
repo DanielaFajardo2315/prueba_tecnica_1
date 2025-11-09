@@ -4,6 +4,7 @@ import { conectMongo } from "./src/config/db.js";
 import { employeeRouter } from "./src/routes/employees.routes.js";
 import { departmentRouter } from "./src/routes/departments.routes.js";
 import cors from "cors";
+import path from "path";
 
 // Configuración de dependencias
 const app = express();
