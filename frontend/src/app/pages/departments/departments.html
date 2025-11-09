@@ -1,1 +1,96 @@
-<p>departments works!</p>
+<div class="tabla">
+    <table>
+        <thead>
+            <tr>
+                <th>CODIGO DEPARTAMENTO</th>
+                <th>NOMBRE DEPARTAMENTO</th>
+                <th>ÁREA</th>
+                <th>DIRECTOR DEPARTAMENTO</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (departamento of allDepartments; track $index) {
+            <tr>
+                <td>{{departamento.departmentCode}}</td>
+                <td>{{departamento.departmentName}}</td>
+                <td>{{departamento.companyArea}}</td>
+                <td>{{departamento.departmentManager}}</td>
+                <td>
+                    <button data-bs-toggle="modal" data-bs-target="#modalUpdate"
+                        (click)="loadDepartmentForEdit(departamento)"><i class="bi bi-pen-fill"></i></button>
+                    <button><i class="bi bi-trash-fill" (click)="deleteDepartment(departamento)"></i></button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <div class="container_button">
+        <button class="button_crear" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="bi bi-person-plus-fill"></i> Crear departamento
+        </button>
+    </div>
+</div>
+<!-- Modal para creación -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal_empleado modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title titulo fs-5" id="exampleModalLabel">Creación de empleado</h3>
+                <button type="button" class="btn-close button_close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <form class="modal-body" [formGroup]="createForm" (ngSubmit)="createDepartment()">
+                <div>
+                    <label for="departmentName">Nombre del departamento</label> <br>
+                    <input type="text" placeholder="Ingrese el nombre del departamento" formControlName="departmentName"> <br>
+                </div>
+                <div>
+                    <label for="area">Área del departamento</label> <br>
+                    <input type="text" placeholder="Ingrese el área del departamento" formControlName="companyArea"> <br>
+                </div>
+                <div>
+                    <label for="departmentManager">Director del departamento</label> <br>
+                    <input type="text" placeholder="Ingrese el director del departamento" formControlName="departmentManager"> <br>
+                </div>
+                <button class="button_crear">
+                    <i class="bi bi-person-plus-fill"></i> Crear departamento
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal para edición -->
+<div class="modal fade" id="modalUpdate" tabindex="-1" aria-labelledby="modalUpdate" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal_empleado modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title titulo fs-5" id="modalUpdate">Edición de departamento</h3>
+                <button type="button" class="btn-close button_close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <form class="modal-body" [formGroup]="createForm" (ngSubmit)="updateDepartment()">
+                <div>
+                    <div>
+                        <label for="departmentCode">Código del departamento</label> <br>
+                        <input type="number" placeholder="Ingrese el código del departamento"
+                            formControlName="departmentCode"> <br>
+                    </div>
+                    <label for="departmentName">Nombre del departamento</label> <br>
+                    <input type="text" placeholder="Ingrese el nombre del departamento" formControlName="departmentName"> <br>
+                </div>
+                <div>
+                    <label for="area">Área del departamento</label> <br>
+                    <input type="text" placeholder="Ingrese el área del departamento" formControlName="companyArea"> <br>
+                </div>
+                <div>
+                    <label for="departmentManager">Director del departamento</label> <br>
+                    <input type="text" placeholder="Ingrese el director del departamento" formControlName="departmentManager"> <br>
+                </div>
+                <button class="button_crear">
+                    <i class="bi bi-person-plus-fill"></i> Editar departamento
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
