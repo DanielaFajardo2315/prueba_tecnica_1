@@ -1,59 +1,83 @@
-# Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.2.
+# DELIVERY (Prueba técnica - Frontend)
 
-## Development server
+Este proyecto es una aplicación web de gestión de recursos humanos desarrollada con Angular CLI 20. Permite administrar la información de Empleados y Departamentos a través de interfaces de usuario sencillas que implementan las funciones básicas CRUD (Crear, Leer, Actualizar, Eliminar).
 
-To start a local development server, run:
+## Características principales
 
+- Página de Inicio (Dashboard): Muestra un resumen de datos clave del negocio en tiempo real.
+
+- Gestión de Empleados: Interfaz para administrar, crear, editar y eliminar registros de empleados.
+
+- Gestión de Departamentos: Interfaz para administrar, crear, editar y eliminar departamentos.
+
+- Página "Not Found" (404): Manejo de rutas no existentes.
+
+## Dashboard - Vista de Inicio
+La página principal ofrece una visión rápida del estado del negocio con los siguientes indicadores:
+
+- Cantidad de Empleados.
+
+- Cantidad de Empleados Directos.
+
+- Cantidad de Departamentos.
+
+- Cantidad de Áreas.
+
+## Paleta de colores
+
+| Color             | Hex                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| Color primario | #B49A85 |
+| Color secundario | #414A6B |
+| Color de botones | #FF5851 |
+| Color de texto oscuro | #1C1B20 |
+| Color de texto claro | #fffcf4 |
+| Color de títulos | #F3C130 |
+
+## Tecnologías y requisitos
+
+Este proyecto fue generado con la versión 20.x de Angular CLI.
+- Angular CLI
+- Node.js
+- npm
+## Instalación
+
+Esta instalación debe ser hecha en la carpeta principal del repositorio (prueba tecnica 1)
+
+1. Clonar el repositorio
 ```bash
-ng serve
+  git clone https://github.com/DanielaFajardo2315/prueba_tecnica_1.git
+  cd prueba_tecnica_1
+  cd frontend
+```
+2. Instalar dependencias
+```bash
+  npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+3. Ejecutar el servidor
 ```bash
-ng generate component component-name
+  ng serve -o
 ```
+## Estructura del proyecto
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- `src/app/components/`: Componentes reutilizables.
 
-```bash
-ng generate --help
-```
+- `src/app/pages/`: Componentes principales que representan las vistas (páginas).
 
-## Building
+- `home/`: Componente para la página de inicio.
 
-To build the project run:
+- `employees/`: Página relacionada con la gestión de empleados.
 
-```bash
-ng build
-```
+- `departments/`: Página relacionada con la gestión de departamentos.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- `not-found/`: Página 404.
 
-## Running unit tests
+- `src/app/services/`: Servicios para la lógica de negocio, manejo de datos y llamadas a la API (CRUD).
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- `src/app/models/`: Definición de interfaces para Empleado y Departamento.
+## Authors
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Proyecto creado por:
+- [@DanielaFajardo2315](https://github.com/DanielaFajardo2315)
