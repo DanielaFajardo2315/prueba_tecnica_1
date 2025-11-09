@@ -28,7 +28,7 @@
                 }
                 <td>
                     <button data-bs-toggle="modal" data-bs-target="#modalUpdate" (click)="loadEmployeeForEdit(empleado)"><i class="bi bi-pen-fill"></i></button>
-                    <button><i class="bi bi-trash-fill"></i></button>
+                    <button><i class="bi bi-trash-fill" (click)="deleteEmployee(empleado)"></i></button>
                 </td>
             </tr>
             }

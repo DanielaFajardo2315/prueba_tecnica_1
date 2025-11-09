@@ -4,6 +4,7 @@ import { EmployeeService } from '../../services/employees';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employees',
@@ -74,6 +75,11 @@ export class Employees {
         console.log(res);
         this.showEmployees();
         this.createForm.reset();
+        Swal.fire({
+          title: res.mensaje,
+          icon: 'success',
+          draggable: true,
+        });
       },
       error: (err: any) => {
         console.error(err.error.mensaje);
@@ -81,82 +87,47 @@ export class Employees {
     });
   }
 
-  // Editar empleado
-  // updateEmployee(id: string, employeeToUpdate: Employee){
-  //   if (this.createForm.invalid) {
-  //     this.createForm.markAllAsTouched();
-  //     return;
-  //   }
-  //   this.selectedEmployeeForEdit = employeeToUpdate;
-
-  //   const employeeData: Employee = {
-  //     employeeCode: this.selectedEmployeeForEdit.employeeCode,
-  //     name: this.createForm.value.name || '',
-  //     lastName1: this.createForm.value.lastName1 || '',
-  //     lastName2: this.createForm.value.lastName2 || '',
-  //     entryDate: this.createForm.value.entryDate || new Date(),
-  //     cargo: this.createForm.value.cargo || '',
-  //     isDirect: this.createForm.value.isDirect ?? true,
-  //     departmentCode: this.createForm.value.departmentCode || 100,
-  //   };
-  //   console.log('Datos del usuario: ', employeeData);
-  // }
-  // loadEmployeeForEdit(employee: Employee): void {
-  //       this.selectedEmployeeForEdit = employee;
-
-  //       // Formatea la fecha para el input[type="date"]
-  //       const datePipe = new DatePipe('en-US'); // Usa el DatePipe inyectado en imports
-  //       const formattedDate = datePipe.transform(employee.entryDate, 'yyyy-MM-dd');
-
-  //       this.createForm.patchValue({
-  //           name: employee.name,
-  //           lastName1: employee.lastName1,
-  //           lastName2: employee.lastName2,
-  //           entryDate: formattedDate, // Asegúrate de que el formato sea 'yyyy-MM-dd'
-  //           cargo: employee.cargo,
-  //           isDirect: employee.isDirect,
-  //           departmentCode: employee.departmentCode,
-  //       });
-  //   }
-
+  // Cargar la info actual del empleado para editar
   loadEmployeeForEdit(employee: Employee): void {
     this.selectedEmployeeForEdit = employee;
 
-    // Formatea la fecha para el input[type="date"]
-    const datePipe = new DatePipe('en-US'); // Usa el DatePipe inyectado en imports
-    const formattedDate = datePipe.transform(employee.entryDate, 'dd/MM/yyyy');
+    const datePipe = new DatePipe('en-US');
+    const formattedDate = datePipe.transform(employee.entryDate, 'yyyy-MM-dd');
 
     this.createForm.patchValue({
       name: employee.name,
       lastName1: employee.lastName1,
       lastName2: employee.lastName2,
-      entryDate: employee.entryDate, // Asegúrate de que el formato sea 'yyyy-MM-dd'
+      entryDate: formattedDate as any,
       cargo: employee.cargo,
       isDirect: employee.isDirect,
       departmentCode: employee.departmentCode,
     });
   }
 
-  // Función para editar el empleado
+  // Edición del empleado
   updateEmployee(): void {
-    // Asegúrate de que el formulario es válido y de que hay un empleado seleccionado
     if (this.createForm.invalid || !this.selectedEmployeeForEdit) {
       this.createForm.markAllAsTouched();
       return;
     }
 
     const employeeCodeToUpdate = this.selectedEmployeeForEdit.employeeCode;
+    const idToUpdate = this.selectedEmployeeForEdit._id;
+    console.log('ID del empleado a editar: ', idToUpdate);
 
-    const idForService = employeeCodeToUpdate.toString();
+    if (!idToUpdate) {
+      console.error('No se pudo obtener el ID del empleado seleccionado para la actualización.');
+      return;
+    }
 
-    // Construir el objeto de datos de empleado con el código existente
+    // Construcción de datos de empleado con el código existente
     const employeeData: Employee = {
+      _id: idToUpdate,
       employeeCode: employeeCodeToUpdate,
       name: this.createForm.value.name || '',
       lastName1: this.createForm.value.lastName1 || '',
       lastName2: this.createForm.value.lastName2 || '',
-      // Convierte la cadena de fecha del formulario a un objeto Date si es necesario para el backend
-      // Aquí simplemente usamos el valor, pero ajusta según tu interfaz/backend
       entryDate: this.createForm.value.entryDate
         ? new Date(this.createForm.value.entryDate)
         : new Date(),
@@ -166,27 +137,68 @@ export class Employees {
     };
 
     console.log('Datos del empleado a actualizar: ', employeeData);
-
-    // Llama al servicio para actualizar el empleado
-    this._employeeService.putEmployee(employeeData, idForService).subscribe({
-      next: (res: any) => {
-        console.log(res);
-        this.showEmployees(); // Recarga la lista
-        // Opcionalmente, cierra el modal y resetea el formulario
-        // Debes tener una forma de cerrar el modal de Bootstrap, por ejemplo,
-        // utilizando la API de Bootstrap o una referencia a la plantilla.
-        this.createForm.reset();
-        this.selectedEmployeeForEdit = undefined;
-      },
-      error: (err: any) => {
-        console.error(err.error.mensaje);
-      },
+    Swal.fire({
+      title: '¿Desea guardar los cambios del empleado?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      denyButtonText: `No guardar`,
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._employeeService.putEmployee(employeeData, idToUpdate).subscribe({
+          next: (res: any) => {
+            console.log(res);
+            this.showEmployees();
+            this.createForm.reset();
+            this.selectedEmployeeForEdit = undefined;
+            Swal.fire(res.mensaje, '', 'success');
+          },
+          error: (err: any) => {
+            console.error(err.error.mensaje);
+          },
+        });
+      } else if (result.isDenied) {
+        Swal.fire('No se guardaron los cambios', '', 'info');
+      }
     });
   }
 
-  // Opcional: Función para manejar el cierre del modal de edición
-  onEditModalClose(): void {
-    this.createForm.reset();
-    this.selectedEmployeeForEdit = undefined;
+  // Eliminar empleado
+  deleteEmployee(employee: Employee) {
+    const idForDelete = employee._id;
+    if (!idForDelete) {
+      console.error('No se pudo obtener el ID del empleado seleccionado para la eliminación.');
+      return;
+    }
+    Swal.fire({
+      title: '¿Está seguro de eliminar este empleado?',
+      text: "No podrá restaurarlo luego",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'var(--color-secundary)',
+      cancelButtonColor: 'var(--color-button)',
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._employeeService.deleteEmployee(idForDelete).subscribe({
+          next: (resp: any) => {
+            Swal.fire({
+              title: 'Eliminado',
+              text: resp.mensaje,
+              icon: 'success',
+            }).then(() => {
+              this.showEmployees();
+            });
+          },
+          error: (err: any) => {
+            console.error(err.error.mensaje);
+            
+          }
+        });
+
+      }
+    });
   }
 }
